@@ -1,44 +1,33 @@
-import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Toaster } from "sonner";
+import { Route, Router, Switch } from "wouter";
+import { useHashLocation } from "wouter/use-hash-location";
 import ErrorBoundary from "./components/ErrorBoundary";
-import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import PublishedPage from "./pages/PublishedPage";
 
-function Router() {
-  // make sure to consider if you need authentication for certain routes
+// Hash routing (/#/p/slug) keeps every route working on any static host
+// (GitHub Pages, Netlify, a plain folder) with no server rewrite rules.
+function Routes() {
   return (
     <Switch>
-      <Route path={"/"} component={Home} />
-      <Route path={"/p/:slug"} component={PublishedPage} />
-      <Route path={"/404"} component={NotFound} />
-      {/* Final fallback route */}
+      <Route path="/" component={Home} />
+      <Route path="/p/:slug/:project" component={PublishedPage} />
       <Route component={NotFound} />
     </Switch>
   );
 }
 
-// NOTE: About Theme
-// - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
-//   to keep consistent foreground/background color across components
-// - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
-
-function App() {
+export default function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider
-        defaultTheme="light"
-        // switchable
-      >
-        <TooltipProvider>
-          <Toaster />
-          <Router />
-        </TooltipProvider>
-      </ThemeProvider>
+      <TooltipProvider>
+        <Toaster theme="light" position="bottom-right" />
+        <Router hook={useHashLocation}>
+          <Routes />
+        </Router>
+      </TooltipProvider>
     </ErrorBoundary>
   );
 }
-
-export default App;

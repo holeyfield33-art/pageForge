@@ -70,7 +70,7 @@ export default function Home() {
   const pageIsValid = Boolean(validation?.success);
   const currentSlug = blueprint?.meta.slug || "untitled-page";
   const publishUrl = project && typeof window !== "undefined"
-    ? `${window.location.origin}/p/${encodeURIComponent(currentSlug)}?project=${encodeURIComponent(project.id)}`
+    ? `${window.location.origin}${window.location.pathname}#/p/${encodeURIComponent(currentSlug)}/${encodeURIComponent(project.id)}`
     : "";
   const filteredProjects = projects.filter((item) => item.name.toLowerCase().includes(search.toLowerCase()));
 
@@ -219,7 +219,7 @@ export default function Home() {
     <div className="studio-shell">
       <header className="topbar">
         <button type="button" className="mobile-menu-button" aria-label="Open project panel" onClick={() => setShowBrief((value) => !value)}><Menu size={19} /></button>
-        <a className="brand-lockup" href="/" aria-label="Pageforge home"><span className="brand-glyph">P</span><span className="brand-name">pageforge<span className="brand-period">.</span></span><span className="brand-divider" /><span className="brand-workspace">STUDIO</span></a>
+        <a className="brand-lockup" href="#/" aria-label="Pageforge home"><span className="brand-glyph">P</span><span className="brand-name">pageforge<span className="brand-period">.</span></span><span className="brand-divider" /><span className="brand-workspace">STUDIO</span></a>
         <div className="topbar-breadcrumb"><span>Workspace</span><span className="breadcrumb-slash">/</span><strong>{project.name}</strong><ChevronDown size={13} /></div>
         <div className="topbar-actions">
           <span className="save-indicator"><span className="save-indicator__dot" />Saved locally</span>
@@ -262,7 +262,7 @@ export default function Home() {
               <div className="storage-note"><span className="storage-note__dot" />Drafts, revisions, and publish state stay in this browser.</div>
             </div>
           </div>
-          <div className="brief-panel__bottom"><div className="avatar-mark">JD</div><div><strong>Jordan’s studio</strong><span>Local workspace</span></div><ChevronDown size={13} /></div>
+          <div className="brief-panel__bottom"><div className="avatar-mark">PF</div><div><strong>Local workspace</strong><span>Saved in this browser</span></div></div>
         </aside>
 
         <main className="canvas-panel">

@@ -83,7 +83,7 @@ function makeSections(template: TemplateOption, title: string, prompt: string): 
     },
     {
       id: createId("section"), type: "proof", label: "A little proof", visible: true,
-      props: { heading: "Good work travels.", quote: "They understood the feeling we wanted to create before we could put it into words.", author: "Alex Morgan", role: "Founder, Fieldnote" },
+      props: { heading: "Good work travels.", quote: "Replace this with a real quote from a customer, in their words.", author: "Customer name", role: "Their role or company" },
     },
     {
       id: createId("section"), type: "cta", label: "Call to action", visible: true,
@@ -136,7 +136,7 @@ export function createSection(type: SectionType, theme: PageBlueprint["theme"]):
     case "hero": return { id, type, label: "Hero", visible: true, props: { eyebrow: "NEW / 2026", headline: "A clearer way to show up.", subheadline: "A little more thought in every detail.", ctaLabel: "Explore more", ctaHref: "#details", scene: "orb" } };
     case "features": return { id, type, label: "Features", visible: true, props: { heading: "Made for the details", intro: "The things that make a difference.", items: [{ id: createId("feature"), title: "First feature", description: "Describe a meaningful benefit." }] } };
     case "gallery": return { id, type, label: "Gallery", visible: true, props: { heading: "A closer look", intro: "A few favorites from the collection.", items: [{ id: createId("tile"), title: "Featured work", note: "01 / Feature", color: theme.primary }] } };
-    case "proof": return { id, type, label: "Social proof", visible: true, props: { heading: "A little proof.", quote: "They made the whole experience feel effortless.", author: "Jordan Lee", role: "Customer" } };
+    case "proof": return { id, type, label: "Social proof", visible: true, props: { heading: "A little proof.", quote: "Replace this with a real quote from a customer, in their words.", author: "Customer name", role: "Their role or company" } };
     case "cta": return { id, type, label: "Call to action", visible: true, props: { heading: "Ready when you are.", body: "Take the next step with confidence.", ctaLabel: "Get in touch", ctaHref: "mailto:hello@example.com" } };
     case "faq": return { id, type, label: "FAQ", visible: true, props: { heading: "Frequently asked", items: [{ id: createId("faq"), question: "How does it work?", answer: "Tell us what you need and we’ll take it from there." }] } };
     case "footer": return { id, type, label: "Footer", visible: true, props: { brand: "Pageforge", note: "Made with intention.", email: "hello@example.com" } };
