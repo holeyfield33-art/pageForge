@@ -38,7 +38,7 @@ function GeneratedSection({ section, blueprint, onSelectSection, selected }: { s
         <section id="top" className={`generated-hero generated-section${selectClass}`} onClick={focus}>
           {heroImage && <img className="generated-hero__media" src={heroImage} alt="" loading="lazy" onError={(event) => { event.currentTarget.style.display = "none"; }} />}
           <Suspense fallback={<div className="three-hero"><div className="three-hero__fallback-orb" /></div>}>
-            <ThreeHero primary={blueprint.theme.primary} accent={blueprint.theme.accent} scene={section.props.scene} />
+            <ThreeHero primary={blueprint.theme.primary} accent={blueprint.theme.accent} secondary={blueprint.theme.secondary} scene={section.props.scene} />
           </Suspense>
           <div className="generated-hero__copy">
             <div className="generated-eyebrow"><span className="status-dot" />{section.props.eyebrow}</div>

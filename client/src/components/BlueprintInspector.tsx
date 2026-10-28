@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Eye, EyeOff, FileText, Palette, Settings2 } from "lucide-react";
-import type { PageBlueprint, Section } from "@/lib/blueprint";
+import { SCENE_IDS, SCENE_LABELS, type PageBlueprint, type SceneId, type Section } from "@/lib/blueprint";
 
 type Props = {
   blueprint: PageBlueprint;
@@ -53,7 +53,7 @@ export default function BlueprintInspector({ blueprint, selectedSection, onUpdat
               <Field label="Subheadline" value={selectedSection.props.subheadline} maxLength={240} multiline onChange={(value) => updateProps({ subheadline: value })} />
               <Field label="Button label" value={selectedSection.props.ctaLabel} maxLength={48} onChange={(value) => updateProps({ ctaLabel: value })} />
               <Field label="Button link" value={selectedSection.props.ctaHref} maxLength={240} onChange={(value) => updateProps({ ctaHref: value })} />
-              <label className="inspector-field"><span className="inspector-field__label">3D hero form</span><select value={selectedSection.props.scene} onChange={(event) => updateProps({ scene: event.target.value })}><option value="orb">Iridescent orb</option><option value="rings">Orbiting rings</option><option value="crystal">Faceted crystal</option></select></label>
+              <label className="inspector-field"><span className="inspector-field__label">3D hero form</span><select value={selectedSection.props.scene} onChange={(event) => updateProps({ scene: event.target.value as SceneId })}>{SCENE_IDS.map((id) => <option key={id} value={id}>{SCENE_LABELS[id]}</option>)}</select></label>
             </>}
             {selectedSection.type === "features" && <>
               <Field label="Heading" value={selectedSection.props.heading} maxLength={120} onChange={(value) => updateProps({ heading: value })} />

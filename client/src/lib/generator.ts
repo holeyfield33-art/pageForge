@@ -1,4 +1,4 @@
-import { BLUEPRINT_VERSION, createId, slugify, type PageBlueprint, type Section, type SectionType } from "./blueprint";
+import { BLUEPRINT_VERSION, createId, slugify, type PageBlueprint, type SceneId, type Section, type SectionType } from "./blueprint";
 
 export interface TemplateOption {
   id: string;
@@ -7,7 +7,7 @@ export interface TemplateOption {
   description: string;
   marker: string;
   theme: PageBlueprint["theme"];
-  scene: "orb" | "rings" | "crystal";
+  scene: SceneId;
 }
 
 const palettes = {
@@ -36,6 +36,21 @@ function inferTemplate(prompt: string): TemplateOption {
   return TEMPLATE_OPTIONS[0];
 }
 
+// Brief keywords that suggest a hero scene, checked in order. The first match
+// wins; with no match the template's own scene is used.
+const SCENE_HINTS: [RegExp, SceneId][] = [
+  [/\b(bio\w*|health|medical|clinic|science|lab|genetic\w*|pharma\w*)\b/, "helix"],
+  [/\b(ai|ml|network|developer|api|cloud|crypto|blockchain|community|platform)\b/, "constellation"],
+  [/\b(analytics|data|dashboard|metrics|finance|fintech|audio|music|podcast|sound)\b/, "wave"],
+  [/\b(architect\w*|real estate|property|construction|furniture|interior\w*)\b/, "stack"],
+  [/\b(skin\w*|beauty|wellness|spa|cosmetic\w*|organic|ocean)\b/, "blob"],
+];
+
+export function inferScene(prompt: string, fallback: SceneId): SceneId {
+  const text = prompt.toLowerCase();
+  return SCENE_HINTS.find(([pattern]) => pattern.test(text))?.[1] ?? fallback;
+}
+
 function inferTitle(prompt: string, fallback: string): string {
   const match = prompt.match(/(?:for|called|named)\s+(?:a|an|the)?\s*([^,.!?]+?)(?=\s+(?:with|that|focused on|featuring|and)\b|[.!?]|$)/i);
   if (!match?.[1]) return fallback;
@@ -54,7 +69,7 @@ function makeSections(template: TemplateOption, title: string, prompt: string): 
         subheadline: template.id === "saas-launch" ? "A clearer way to bring your best work into the world." : template.description,
         ctaLabel: template.id === "table-story" ? "Explore the menu" : "Explore the collection",
         ctaHref: "#details",
-        scene: template.scene,
+        scene: inferScene(prompt, template.scene),
       },
     },
     {

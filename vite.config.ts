@@ -16,5 +16,7 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist"),
     emptyOutDir: true,
+    // three.js alone is ~540 kB minified; it is already split into a lazy chunk.
+    chunkSizeWarningLimit: 600,
   },
 });

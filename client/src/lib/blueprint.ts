@@ -2,6 +2,20 @@ import { z } from "zod";
 
 export const BLUEPRINT_VERSION = "1.0.0";
 
+// 3D hero scenes. New ids only extend this list, so older drafts stay valid.
+export const SCENE_IDS = ["orb", "rings", "crystal", "blob", "wave", "stack", "helix", "constellation"] as const;
+export type SceneId = (typeof SCENE_IDS)[number];
+export const SCENE_LABELS: Record<SceneId, string> = {
+  orb: "Iridescent orb",
+  rings: "Orbiting rings",
+  crystal: "Faceted crystal",
+  blob: "Liquid blob",
+  wave: "Signal wave",
+  stack: "Floating stack",
+  helix: "Double helix",
+  constellation: "Constellation",
+};
+
 const HexColor = z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Use a six-digit hex color.");
 const BaseSection = {
   id: z.string().min(1),
@@ -13,7 +27,7 @@ export const SectionSchema = z.discriminatedUnion("type", [
   z.object({
     ...BaseSection,
     type: z.literal("hero"),
-    props: z.object({ eyebrow: z.string().max(80), headline: z.string().min(1).max(120), subheadline: z.string().max(240), ctaLabel: z.string().max(48), ctaHref: z.string().max(240), scene: z.enum(["orb", "rings", "crystal"]) }),
+    props: z.object({ eyebrow: z.string().max(80), headline: z.string().min(1).max(120), subheadline: z.string().max(240), ctaLabel: z.string().max(48), ctaHref: z.string().max(240), scene: z.enum(SCENE_IDS) }),
   }),
   z.object({
     ...BaseSection,

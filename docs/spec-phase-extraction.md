@@ -1,6 +1,6 @@
 # Salvaged page-specification logic from qreatestudiosv1
 
-Reviewed source: `https://github.com/holeyfield33-art/qreatestudiosv1` (`main`, checked out in the task sandbox).
+Reviewed source: `https://github.com/holeyfield33-art/qreatestudiosv1` (`main`).
 
 The public repository does not contain a module named “Blueprint” or “spec phase.” The reusable specification logic is distributed across the landing-page creation flow, template definitions, Puck editor configuration, GrapesJS editor adapter, API routes, Prisma model, and page schema.
 
@@ -32,4 +32,4 @@ The public repository does not contain a module named “Blueprint” or “spec
 
 ## Pageforge mapping
 
-Pageforge keeps the reusable concepts—template/category choice, metadata and SEO, ordered typed sections, per-section properties and visibility, color/font/image-slot design metadata, schema validation/versioning, draft/revision history, and publish-state transitions. It uses a Puck-style structured blueprint and a procedural Three.js hero renderer. Prompt interpretation is deterministic and local because the approved project choices did not enable the LLM integration. Drafts and revisions are stored in browser local storage because managed database persistence was not enabled. “Publish” creates a browser-local preview route; it is explicitly not represented as public hosting. The original QR connection, accounts, organizations, billing, CRM, print services, analytics, and server-side tenant rules are outside this focused product.
+Pageforge keeps the reusable concepts—template/category choice, metadata and SEO, ordered typed sections, per-section properties and visibility, color/font/image-slot design metadata, schema validation/versioning, draft/revision history, and publish-state transitions. It uses a Puck-style structured blueprint and a procedural Three.js hero renderer. Prompt interpretation is deterministic and local, with no LLM call. Drafts and revisions are stored in browser local storage, with no server. “Publish” creates a browser-local preview route; it is explicitly not represented as public hosting. The original QR connection, accounts, organizations, billing, CRM, print services, analytics, and server-side tenant rules are outside this focused product.
