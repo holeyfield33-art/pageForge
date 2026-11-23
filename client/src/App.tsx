@@ -5,6 +5,7 @@ import { Route, Router, Switch } from "wouter";
 import { useHashLocation } from "wouter/use-hash-location";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Home from "./pages/Home";
+import StudioLanding from "./pages/StudioLanding";
 import PublishedPage from "./pages/PublishedPage";
 
 // Hash routing (/#/p/slug) keeps every route working on any static host
@@ -12,7 +13,8 @@ import PublishedPage from "./pages/PublishedPage";
 function Routes() {
   return (
     <Switch>
-      <Route path="/" component={Home} />
+      <Route path="/" component={StudioLanding} />
+      <Route path="/builder" component={Home} />
       <Route path="/p/:slug/:project" component={PublishedPage} />
       <Route component={NotFound} />
     </Switch>
